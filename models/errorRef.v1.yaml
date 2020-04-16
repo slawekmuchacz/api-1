@@ -1,0 +1,141 @@
+type: object
+definitions:
+  PnrHeaderFlag: null
+  description: Definition of flags stored in PNR header
+  code:
+    type: string
+    example: CSH
+  value:
+    type: string
+    enum:
+      - STANDBY_STAFF
+      - BOOKABLE_STAFF
+      - CODESHARE
+      - OPERATING_DCS
+      - THIRD_PARTY_MIGRATION
+      - NON_COMMERCIAL
+      - GROUP
+      - OTHER_AIRLINE
+      - MASS_MIGRATED
+      - INTERNATIONAL
+      - DOMESTIC
+      - HAS_HYBRID
+      - HAS_FEDERAL_AIR_MARSHAL
+      - HAS_GROUND_HANDLING
+      - HAS_CORPORATE
+      - HAS_PREPAID_TICKET_ADVICE
+      - TTY_END_OF_TRANSACTION
+      - EDIFACT_CLAIM
+      - TERMINAL_EMULATOR_CLAIM
+    example: CODESHARE
+  TravelersGroup:
+    type: object
+    properties:
+      size:
+        type: integer
+        description: Number of name-assigned passengers that can be booked in the group PNR
+        example: 15
+      name:
+        type: string
+        description: Name of the group PNR
+        example: ASIA PACIFIC TOUR TRIP
+title: PNRModel
+properties:
+  type:
+    type: string
+    description: resource name
+    enum:
+      - pnr
+    example: pnr
+  id:
+    type: string
+    description: id of Passenger name record
+    example: ABC123-2019-10-05
+  reference:
+    type: string
+    description: Unique identifier for the order
+    example: ABC123
+  version:
+    type: string
+    description: Current envelope number
+    example: 1
+  owner:
+    $ref: ../PointOfSale/PointOfSale.v1.yaml
+  creation:
+    $ref: ../EventLog/EventLog.v1.yaml
+  lastModification:
+    $ref: ../EventLog/EventLog.v1.yaml
+  pnrProperties:
+    type: array
+    description: Flags stored in PNR Header
+    items:
+      $ref: '#/definitions/PnrHeaderFlag'
+  queuingOffice:
+    $ref: ../Office/Office.v1.yaml
+  nip:
+    type: integer
+    description: Order Number In Party - number of passengers in the order
+    example: 5
+  group:
+    $ref: '#/definitions/TravelersGroup'
+  associatedPnrs:
+    type: array
+    items:
+      $ref: ./AssociatedPnr/AssociatedPnr.v1-0.yaml
+  travelers:
+    type: array
+    items:
+      $ref: ../Stakeholder/Stakeholder.v1.yaml
+  products:
+    type: array
+    description: A product is either a flight segment or a service booked in reservation
+    items:
+      $ref: ../Product/Product.v2.yaml
+  flightItinerary:
+    type: array
+    items:
+      $ref: ./FlightBounds/FlightBounds.v1.yaml
+  ticketingReferences:
+    type: array
+    description: Travel document references contained in reservation
+    items:
+      $ref: ./TicketingReference/TicketingReference.v1.yaml
+  loyaltyRequests:
+    type: array
+    description: 'Loyalty elements for Frequent Flyers & Corporate Program users'
+    items:
+      $ref: ../Service/Service.v1.yaml
+  keywords:
+    type: array
+    description: 'Special Keywords, Other Service Information'
+    items:
+      $ref: ../Service/Service.v1.yaml
+  remarks:
+    type: array
+    items:
+      type: string
+  contacts:
+    type: array
+    description: global contacts i.e. non-related to a particular traveler
+    items:
+      $ref: ../Contact/Contact.v1.yaml
+  automatedProcesses:
+    type: array
+    description: 'Ticketing arrangements & Amadeus Time Limit'
+    items:
+      $ref: ./AutomatedProcess/AutomatedProcess.v1.yaml
+  paymentMethods:
+    type: array
+    description: FOPs i.e. FP lines contained in reservation.
+    items:
+      $ref: ./FareElement/FareElement.v1.yaml
+  fareElements:
+    type: array
+    description: Elements in reservation related to pricing
+    items:
+      $ref: ./FareElement/FareElement.v1.yaml
+  quotations:
+    type: array
+    description: Pricing records stored in reservation
+    items:
+      $ref: ../QuotationRecord/QuotationRecord.v1.yaml

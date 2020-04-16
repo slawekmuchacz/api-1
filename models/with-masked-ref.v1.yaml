@@ -1,0 +1,5 @@
+title: with-masked-ref
+type: object
+properties:
+  maskedRef:
+    $ref: 'http://localhost:4060/nodes.raw?srn=gh/mallachari/api/models/ref-to-local.v1.yaml&mid=33'

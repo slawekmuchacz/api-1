@@ -1,0 +1,6 @@
+title: with-ref-to-local
+type: object
+description: ''
+properties:
+  localRef:
+    $ref: ./local.v1.yaml

@@ -1,0 +1,9 @@
+title: local-model
+type: object
+properties:
+  id:
+    type: string
+  di:
+    type:
+      - string
+      - number
