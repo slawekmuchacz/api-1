@@ -14,7 +14,14 @@ paths:
       parameters:
         - schema:
             type: string
+            deprecated: true
+            default: aaa
+            enum:
+              - api
           in: query
           name: a
+          explode: true
+          allowEmptyValue: true
+          allowReserved: true
 components:
   schemas: {}
