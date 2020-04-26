@@ -9,7 +9,20 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  raz:
+                    type: string
+                  dwa:
+                    type: string
+                  trzy:
+                    type: string
       operationId: get-api
       parameters:
         - schema:
