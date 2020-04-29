@@ -2,6 +2,7 @@ openapi: 3.0.0
 info:
   title: api
   version: '1.0'
+  description: 'Click [here](../docs/anchors.md#header1) or [here](../docs/anchors.md#header3)'
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -27,11 +28,11 @@ paths:
       parameters:
         - schema:
             type: string
-            deprecated: true
             default: aaa
             enum:
               - api
           in: query
+          deprecated: true
           name: a
           explode: true
           allowEmptyValue: true
