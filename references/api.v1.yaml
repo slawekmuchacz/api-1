@@ -33,7 +33,7 @@ paths:
               - api
           in: query
           deprecated: true
-          name: aaoaaaqq
+          name: oaaaqq
           explode: true
           allowEmptyValue: true
           allowReserved: true
