@@ -3,8 +3,7 @@ type: object
 x-tags:
   - Email
 description: ''
-x-examples:
-  example-1: {}
+x-examples: {}
 properties:
   category:
     type: string

@@ -33,10 +33,18 @@ paths:
               - api
           in: query
           deprecated: true
-          name: oas
+          name: a
           explode: true
           allowEmptyValue: true
           allowReserved: true
       description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '':
+                  type: string
 components:
   schemas: {}
