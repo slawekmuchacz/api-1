@@ -1,0 +1,13 @@
+title: example
+type: object
+properties:
+  id:
+    type: string
+examples:
+  kk:
+    oo: oo
+x-examples:
+  mm:
+    mm: mm
+x-example:
+  ww: ww

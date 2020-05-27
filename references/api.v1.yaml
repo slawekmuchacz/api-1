@@ -24,6 +24,12 @@ paths:
                     type: string
                   trzy:
                     type: string
+                example:
+                  type: schema
+              examples:
+                ex-1:
+                  value:
+                    type: media
       operationId: get-api
       parameters:
         - schema:
@@ -37,5 +43,19 @@ paths:
           explode: true
           allowEmptyValue: true
           allowReserved: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                q:
+                  type: string
+              example:
+                type: schema
+            examples:
+              ex-1:
+                value:
+                  type: media
 components:
   schemas: {}
