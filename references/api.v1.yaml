@@ -25,11 +25,11 @@ paths:
                   trzy:
                     type: string
                 example:
-                  type: schema
+                  type: default schema
               examples:
                 ex-1:
                   value:
-                    type: media
+                    type: named media
       operationId: get-api
       parameters:
         - schema:
@@ -52,10 +52,10 @@ paths:
                 q:
                   type: string
               example:
-                type: schema
+                type: default schema
             examples:
               ex-1:
                 value:
-                  type: media
+                  type: named media
 components:
   schemas: {}

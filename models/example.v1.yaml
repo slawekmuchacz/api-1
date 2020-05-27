@@ -4,10 +4,14 @@ properties:
   id:
     type: string
 examples:
-  kk:
-    oo: oo
+  ex-1:
+    type: named example-1
+  ex-2:
+    type: named example-2
 x-examples:
-  mm:
-    mm: mm
+  x-ex-1:
+    type: named x-example-1
+  x-ex-2:
+    type: named x-example-2
 x-example:
-  ww: ww
+  type: default x-example
