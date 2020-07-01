@@ -16,7 +16,7 @@ properties:
     format: date-time
     description: When the object was last accessed
   test:
-    $ref: 'http://localhost:8080/some/route/that/doesnt/exist.yaml'
+    $ref: 'http://localhost:8085/some/route/that/doesnt/exist.yaml'
 required:
   - created_at
   - updated_at
