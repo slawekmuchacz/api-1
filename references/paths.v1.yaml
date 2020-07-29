@@ -8,7 +8,8 @@ paths:
   '/path/{ole}/{kle}/{mmm}':
     get:
       summary: Your GET endpoint
-      tags: []
+      tags:
+        - path
       responses: {}
       operationId: get-path
       parameters:
@@ -39,4 +40,14 @@ paths:
         in: path
         required: true
 components:
-  schemas: {}
+  schemas:
+    Pap:
+      title: Pap
+      type: object
+      properties:
+        id:
+          type: string
+      x-tags:
+        - path
+tags:
+  - name: path

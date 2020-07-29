@@ -9,7 +9,6 @@ paths:
   /api:
     get:
       summary: Your GET endpoint
-      tags: []
       responses:
         '200':
           description: OK
@@ -47,4 +46,11 @@ paths:
                 '':
                   type: string
 components:
-  schemas: {}
+  schemas:
+    Kle:
+      title: Kle
+      type: object
+      properties:
+        id:
+          type: string
+tags: []
