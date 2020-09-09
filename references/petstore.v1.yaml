@@ -12,7 +12,7 @@ paths:
       summary: List all pets
       operationId: listPets
       tags:
-        - pets
+        - Pets
       parameters:
         - name: limit
           in: query
@@ -47,7 +47,7 @@ paths:
       summary: Create a pet
       operationId: createPets
       tags:
-        - pets
+        - Pets
       responses:
         '201':
           description: Null response
@@ -62,7 +62,7 @@ paths:
       summary: Info for a specific pet
       operationId: showPetById
       tags:
-        - pets
+        - Pets
       parameters:
         - name: petId
           in: path
