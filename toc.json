@@ -16,6 +16,10 @@
       "uri": "docs/html.md"
     },
     {
+      "type": "divider",
+      "title": "Mech"
+    },
+    {
       "type": "item",
       "title": "koko",
       "uri": "docs/koko.md"
