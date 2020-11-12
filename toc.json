@@ -1,0 +1,102 @@
+{
+  "items": [
+    {
+      "type": "item",
+      "title": "Header",
+      "uri": "docs/anchors.md"
+    },
+    {
+      "type": "item",
+      "title": "exit",
+      "uri": "docs/exit.md"
+    },
+    {
+      "type": "item",
+      "title": "html",
+      "uri": "docs/html.md"
+    },
+    {
+      "type": "item",
+      "title": "koko",
+      "uri": "docs/koko.md"
+    },
+    {
+      "type": "item",
+      "title": "Test",
+      "uri": "docs/mech.md"
+    },
+    {
+      "type": "item",
+      "title": "raz",
+      "uri": "docs/raz.md"
+    },
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "api",
+      "uri": "references/api.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "paths",
+      "uri": "references/paths.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Swagger Petstore",
+      "uri": "references/petstore.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Swagger Petstore",
+      "uri": "references/petstore.v2.yaml"
+    },
+    {
+      "type": "divider",
+      "title": "Schemas"
+    },
+    {
+      "type": "item",
+      "title": "Set",
+      "uri": "models/Set.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Email",
+      "uri": "models/email.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "PNRModel",
+      "uri": "models/errorRef.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "local-model",
+      "uri": "models/local.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Email Message",
+      "uri": "models/message.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "with-ref-to-local",
+      "uri": "models/ref-to-local.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Metadata",
+      "uri": "models/refError.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "with-masked-ref",
+      "uri": "models/with-masked-ref.v1.yaml"
+    }
+  ]
+}
