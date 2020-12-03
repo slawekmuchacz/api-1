@@ -16,10 +16,6 @@
       "uri": "docs/html.md"
     },
     {
-      "type": "divider",
-      "title": "Mech"
-    },
-    {
       "type": "item",
       "title": "koko",
       "uri": "docs/koko.md"
@@ -45,6 +41,11 @@
     },
     {
       "type": "item",
+      "title": "Devices",
+      "uri": "references/devices.v1.yaml"
+    },
+    {
+      "type": "item",
       "title": "paths",
       "uri": "references/paths.v1.yaml"
     },
@@ -64,23 +65,8 @@
     },
     {
       "type": "item",
-      "title": "Set",
-      "uri": "models/Set.v1.yaml"
-    },
-    {
-      "type": "item",
       "title": "Email",
       "uri": "models/email.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "PNRModel",
-      "uri": "models/errorRef.v1.yaml"
-    },
-    {
-      "type": "item",
-      "title": "local-model",
-      "uri": "models/local.v1.yaml"
     },
     {
       "type": "item",
@@ -89,18 +75,33 @@
     },
     {
       "type": "item",
-      "title": "with-ref-to-local",
-      "uri": "models/ref-to-local.v1.yaml"
-    },
-    {
-      "type": "item",
       "title": "Metadata",
       "uri": "models/refError.v1.yaml"
     },
     {
       "type": "item",
+      "title": "PNRModel",
+      "uri": "models/errorRef.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Set",
+      "uri": "models/Set.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "local-model",
+      "uri": "models/local.v1.yaml"
+    },
+    {
+      "type": "item",
       "title": "with-masked-ref",
       "uri": "models/with-masked-ref.v1.yaml"
+    },
+    {
+      "type": "item",
+      "title": "with-ref-to-local",
+      "uri": "models/ref-to-local.v1.yaml"
     }
   ]
 }
