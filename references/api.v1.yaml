@@ -45,6 +45,123 @@ paths:
               properties:
                 '':
                   type: string
+  /logout:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-login
+      parameters:
+        - schema:
+            type: string
+            default: application/json
+            example: application/json
+          in: header
+          name: Content-Type
+        - schema:
+            type: string
+            default: Kle
+            example: qqq
+          in: header
+          name: loginId
+        - schema:
+            type: string
+            default: org
+            example: ex
+          in: header
+          name: orgId
+        - schema:
+            type: string
+            default: tar
+            example: ttt
+          in: header
+          name: target
+        - schema:
+            type: string
+            default: tok
+            example: las
+          in: header
+          name: token
+    parameters: []
+  /refresh:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-refresh
+      parameters:
+        - schema:
+            type: string
+            default: aa
+            example: z
+          in: header
+          name: Content-Type
+        - schema:
+            type: string
+            default: zz
+            example: d
+          in: header
+          name: loginId
+        - schema:
+            type: string
+            default: ss
+            example: qq
+          in: header
+          name: orgId
+        - schema:
+            type: string
+            default: qq
+            example: ee
+          in: header
+          name: refreshKey
+        - schema:
+            type: string
+            default: asd
+            example: dasda
+          in: header
+          name: token
+  /login:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-login
+      parameters:
+        - schema:
+            type: string
+            default: dsada
+            example: weqq
+          in: header
+          name: Content-Type
+        - schema:
+            type: string
+            default: loginId
+            example: loginId
+          in: header
+          name: loginId
+        - schema:
+            type: string
+            default: orgId
+            example: orgId
+          in: header
+          name: orgId
+        - schema:
+            type: string
+            default: password
+            example: password
+          in: header
+          name: password
+        - schema:
+            type: string
+            default: target
+          in: header
+          name: target
+        - schema:
+            type: string
+            default: locale
+            example: locale
+          in: header
+          name: locale
 components:
   schemas:
     Kle:
