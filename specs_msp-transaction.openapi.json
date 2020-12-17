@@ -1,0 +1,787 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "msp-transaction",
+    "description": "Transaction API",
+    "contact": {
+      "name": "FNBO Banking Platform",
+      "email": "BankingPlatformTeam@fnni.com"
+    },
+    "version": "0.1.6"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Trusted",
+      "description": "Controller for trusted msp-transaction"
+    },
+    {
+      "name": "Customer Transactions",
+      "description": "Controller for customer msp-transaction"
+    },
+    {
+      "name": "Transfers"
+    }
+  ],
+  "paths": {
+    "/api/v1/customer/accounts/{accountToken}/transactions": {
+      "get": {
+        "tags": [
+          "Customer Transactions"
+        ],
+        "summary": "Get transactions from ms-transaction-data for a customer.",
+        "operationId": "getTransactionsForCustomer",
+        "parameters": [
+          {
+            "name": "accountToken",
+            "in": "path",
+            "description": "Account Enterprise Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "findTransactionRequest",
+            "in": "query",
+            "description": "Find transaction request with multiple search parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FindTransactionRequest"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "description": "Pageable object with page, size and sort as query parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomPageImplTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomPageImplTransaction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Token Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customer/transactions/ach": {
+      "post": {
+        "tags": [
+          "Customer Transactions"
+        ],
+        "summary": "Initiate a new ACH money transfer",
+        "operationId": "createAch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AchTransferRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AchTransferResource"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AchTransferResource"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Token Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customer/transactions/internal-transfer": {
+      "post": {
+        "tags": [
+          "Customer Transactions"
+        ],
+        "summary": "Create an internal FNBO transfer",
+        "operationId": "createInternalTransfer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InternalTransferRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalTransferResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalTransferResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Token Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/trusted/accounts/{accountToken}/transactions": {
+      "get": {
+        "tags": [
+          "Trusted"
+        ],
+        "summary": "Get transactions from ms-transaction-data for trusted.",
+        "operationId": "getTransactionsForTrusted",
+        "parameters": [
+          {
+            "name": "accountToken",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "findTransactionRequest",
+            "in": "query",
+            "description": "Find transaction request with multiple search parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/FindTransactionRequest"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "description": "Pageable object with page, size and sort as query parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomPageImplTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomPageImplTransaction"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Token Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/customer/transfers/{referenceId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "referenceId",
+          "in": "path",
+          "required": true,
+          "description": "Client-provided idempotency key for the transfer"
+        }
+      ],
+      "get": {
+        "summary": "Get transfer",
+        "tags": [
+          "Customer Transactions",
+          "Transfers"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferResponse"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getTransfer",
+        "description": "Get the details of a transfer by its reference ID"
+      },
+      "put": {
+        "summary": "Create or update a transfer",
+        "operationId": "putTransfer",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransferResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Create or update a transfer by its reference ID",
+        "security": [
+          {
+            "Token Authorization": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransferRequest"
+              }
+            }
+          },
+          "description": ""
+        },
+        "tags": [
+          "Customer Transactions",
+          "Transfers"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FindTransactionRequest": {
+        "type": "object",
+        "properties": {
+          "positionToken": {
+            "type": "string"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "transactionImpactCode": {
+            "type": "string",
+            "enum": [
+              "CREDIT",
+              "DEBIT"
+            ]
+          }
+        }
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unpaged": {
+            "type": "boolean"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Sort": {
+        "type": "object",
+        "properties": {
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CustomPageImplTransaction": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Transaction"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LocalTime": {
+        "type": "object",
+        "properties": {
+          "hour": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minute": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "second": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nano": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountEnterpriseToken": {
+            "type": "string"
+          },
+          "positionEnterpriseToken": {
+            "type": "string"
+          },
+          "transactionImpactCode": {
+            "type": "string",
+            "enum": [
+              "CREDIT",
+              "DEBIT"
+            ]
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "transactionTime": {
+            "$ref": "#/components/schemas/LocalTime"
+          },
+          "transactionAmount": {
+            "type": "string"
+          },
+          "transactionCode": {
+            "type": "string"
+          },
+          "transactionDescription": {
+            "type": "string"
+          },
+          "transactionSourceId": {
+            "type": "string"
+          },
+          "transactionSource": {
+            "type": "string",
+            "enum": [
+              "FINXACT"
+            ]
+          },
+          "addTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "addId": {
+            "type": "string"
+          },
+          "updateId": {
+            "type": "string"
+          },
+          "ledgerBalance": {
+            "type": "number"
+          }
+        }
+      },
+      "AchTransferRequest": {
+        "required": [
+          "amount",
+          "fromAccountToken",
+          "toAccountToken"
+        ],
+        "type": "object",
+        "properties": {
+          "fromAccountToken": {
+            "type": "string"
+          },
+          "toAccountToken": {
+            "type": "string"
+          },
+          "amount": {
+            "minimum": 0.01,
+            "exclusiveMinimum": false,
+            "type": "number"
+          }
+        }
+      },
+      "AchTransferResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fromAccountToken": {
+            "type": "string"
+          },
+          "toAccountToken": {
+            "type": "string"
+          },
+          "amount": {
+            "minimum": 0.01,
+            "exclusiveMinimum": false,
+            "type": "number"
+          }
+        }
+      },
+      "InternalTransferRequest": {
+        "required": [
+          "accountToken",
+          "amount",
+          "deposit",
+          "internalAccountToken",
+          "positionNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "accountToken": {
+            "type": "string"
+          },
+          "positionNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deposit": {
+            "type": "boolean"
+          },
+          "internalAccountToken": {
+            "type": "string"
+          },
+          "amount": {
+            "maximum": 10000,
+            "exclusiveMaximum": false,
+            "minimum": 1,
+            "exclusiveMinimum": false,
+            "type": "number"
+          }
+        }
+      },
+      "InternalTransferResponse": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string"
+          },
+          "beforeAvailableBalance": {
+            "type": "number"
+          },
+          "afterAvailableBalance": {
+            "type": "number"
+          }
+        }
+      },
+      "TransferRequest": {
+        "title": "TransferRequest",
+        "type": "object",
+        "description": "A request to transfer funds between two accounts and/or positions.",
+        "x-examples": {
+          "Deposit account to internal account": {
+            "fromAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "toAccount": {
+              "type": "INTERNAL_ACCOUNT",
+              "accountId": "A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3"
+            },
+            "amount": 12.75
+          },
+          "Internal account to deposit account": {
+            "fromAccount": {
+              "type": "INTERNAL_ACCOUNT",
+              "accountId": "A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3"
+            },
+            "toAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "amount": 12.75
+          },
+          "Deposit account to deposit account": {
+            "fromAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "toAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "15b4e24d-dac5-4a23-a94d-00009b5ffd44",
+              "positionId": "2b77ddb5-5452-460a-8300-4142bdf69dd6"
+            },
+            "amount": 12.75
+          },
+          "Same account but different positions": {
+            "fromAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "toAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "b0e8fa14-7c5f-46d8-9ef3-7cf83b8c85b8"
+            },
+            "amount": 12.75
+          },
+          "Deposit account to linked account (ACH)": {
+            "fromAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "toAccount": {
+              "type": "LINKED_ACCOUNT",
+              "accountId": "29c77161-356b-41b2-ac74-35f7a5619a69"
+            },
+            "amount": 12.75
+          },
+          "Linked account to deposit account (ACH)": {
+            "fromAccount": {
+              "type": "LINKED_ACCOUNT",
+              "accountId": "29c77161-356b-41b2-ac74-35f7a5619a69"
+            },
+            "toAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "amount": 12.75
+          }
+        },
+        "properties": {
+          "fromAccount": {
+            "$ref": "#/components/schemas/AccountReference"
+          },
+          "toAccount": {
+            "$ref": "#/components/schemas/AccountReference"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 10000.01,
+            "example": 12.75,
+            "format": "double"
+          }
+        },
+        "required": [
+          "fromAccount",
+          "toAccount",
+          "amount"
+        ]
+      },
+      "TransferResponse": {
+        "title": "TransferResponse",
+        "type": "object",
+        "description": "The resource representing a transfer of funds between two accounts and/or positions.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 36,
+            "example": "ac079d89-12c3-48ae-ac8f-4906f26e2baf"
+          },
+          "fromAccount": {
+            "$ref": "#/components/schemas/AccountReference"
+          },
+          "toAccount": {
+            "$ref": "#/components/schemas/AccountReference"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0.01,
+            "maximum": 10000.01,
+            "example": 12.75,
+            "format": "double"
+          },
+          "referenceId": {
+            "type": "string",
+            "maxLength": 36,
+            "example": "949cf3df-4370-4fe4-80b0-56d59e751c4b"
+          }
+        },
+        "x-examples": {
+          "Example transfer response": {
+            "id": "ac079d89-12c3-48ae-ac8f-4906f26e2baf",
+            "fromAccount": {
+              "type": "DEPOSIT_ACCOUNT",
+              "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+              "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+            },
+            "toAccount": {
+              "type": "INTERNAL_ACCOUNT",
+              "accountId": "A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3"
+            },
+            "amount": 12.75,
+            "referenceId": "949cf3df-4370-4fe4-80b0-56d59e751c4b"
+          }
+        }
+      },
+      "AccountReference": {
+        "title": "AccountReference",
+        "type": "object",
+        "description": "References a bank account",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DEPOSIT_ACCOUNT",
+              "INTERNAL_ACCOUNT",
+              "LINKED_ACCOUNT"
+            ],
+            "description": "The type of account being referenced"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "The ID of the account being referenced for the given type"
+          },
+          "positionId": {
+            "type": "string",
+            "description": "An optional position ID for accounts that have positions (required for DEPOSIT_ACCOUNT types)"
+          }
+        },
+        "required": [
+          "type",
+          "accountId"
+        ],
+        "x-examples": {
+          "DEPOSIT_ACCOUNT": {
+            "type": "DEPOSIT_ACCOUNT",
+            "accountId": "3879a99f-a16d-426a-92b8-c053492973cb",
+            "positionId": "21becbfd-47fc-463a-ae01-30caec95885b"
+          },
+          "INTERNAL_ACCOUNT": {
+            "type": "INTERNAL_ACCOUNT",
+            "accountId": "A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3"
+          },
+          "LINKED_ACCOUNT": {
+            "type": "LINKED_ACCOUNT",
+            "accountId": "77d69c70-d5b6-45fc-9c13-705417135b84"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Token Authorization": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
