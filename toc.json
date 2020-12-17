@@ -56,8 +56,8 @@
     },
     {
       "type": "item",
-      "title": "Swagger Petstore",
-      "uri": "references/petstore.v2.yaml"
+      "title": "msp-transaction",
+      "uri": "references/specs_msp-transaction.openapi.json"
     },
     {
       "type": "divider",
