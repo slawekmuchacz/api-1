@@ -35,6 +35,35 @@
       "title": "APIS"
     },
     {
+      "type": "group",
+      "title": "RRR Group",
+      "items": [
+        {
+          "type": "item",
+          "title": "koko",
+          "uri": "docs/koko.md"
+        },
+        {
+          "type": "divider",
+          "title": "Group Divider"
+        },
+        {
+          "type": "item",
+          "title": "Test",
+          "uri": "docs/mech.md"
+        },
+        {
+          "type": "divider",
+          "title": "Group Divider"
+        },
+        {
+          "type": "item",
+          "title": "raz",
+          "uri": "docs/raz.md"
+        }
+      ]
+    },
+    {
       "type": "item",
       "title": "api",
       "uri": "references/api.v1.yaml"
