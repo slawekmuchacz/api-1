@@ -8,7 +8,7 @@ servers:
 paths:
   /api:
     get:
-      summary: Your GET endpoint
+      summary: api
       responses:
         '200':
           description: OK
@@ -47,7 +47,7 @@ paths:
                   type: string
   /logout:
     get:
-      summary: Your GET endpoint
+      summary: logout
       tags: []
       responses: {}
       operationId: get-login
@@ -85,7 +85,7 @@ paths:
     parameters: []
   /refresh:
     get:
-      summary: Your GET endpoint
+      summary: refresh
       tags: []
       responses: {}
       operationId: get-refresh
@@ -122,7 +122,7 @@ paths:
           name: token
   /login:
     get:
-      summary: Your GET endpoint
+      summary: login
       tags: []
       responses: {}
       operationId: get-login
@@ -162,6 +162,12 @@ paths:
             example: locale
           in: header
           name: locale
+  /mech:
+    get:
+      summary: mech
+      tags: []
+      responses: {}
+      operationId: get-mech
 components:
   schemas:
     Kle:
