@@ -7,6 +7,11 @@
     },
     {
       "type": "item",
+      "title": "External link",
+      "uri": "https://github.com/stoplightio/dev-portal"
+    },
+    {
+      "type": "item",
       "title": "exit",
       "uri": "docs/exit.md"
     },
