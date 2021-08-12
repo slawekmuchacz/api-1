@@ -6,6 +6,10 @@
       "uri": "docs/anchors.md"
     },
     {
+      "type":"divider",
+      "tytile": "External"
+    },
+    {
       "type": "item",
       "title": "External link",
       "uri": "https://github.com/stoplightio/dev-portal"
