@@ -23,6 +23,17 @@ paths:
                     type: string
                   trzy:
                     type: string
+              examples:
+                example-1:
+                  value:
+                    raz: string
+                    dwa: string
+                    trzy: string
+                example-2:
+                  value:
+                    raz: raz
+                    dwa: dwa
+                    trzy: trzy
       operationId: get-api
       parameters:
         - schema:
