@@ -3,5 +3,5 @@ anyOf:
   - allOf:
       - type: object
         properties:
-          id:
+          m:
             type: string
