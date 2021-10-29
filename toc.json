@@ -2,6 +2,7 @@
   "items": [
     {
       "type": "group",
+      "title": "Internal Group",
       "items": [
         {
           "type": "item",
