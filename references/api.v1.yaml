@@ -183,8 +183,10 @@ components:
   schemas:
     Kle:
       title: Kle
-      type: object
-      properties:
-        id:
-          type: string
+      anyOf:
+        - allOf:
+            - type: object
+              properties:
+                id:
+                  type: string
 tags: []

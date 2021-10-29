@@ -1,0 +1,7 @@
+title: nesting
+anyOf:
+  - allOf:
+      - type: object
+        properties:
+          m:
+            type: string
