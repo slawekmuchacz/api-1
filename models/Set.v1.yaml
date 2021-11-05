@@ -3,3 +3,4 @@ type: object
 properties:
   id:
     $ref: 'http://localhost:8080/api/nodes.raw/?srn=gh/mallachari/api/models/message.v1.yaml&mid=3&deref=bundle'
+x-internal: true

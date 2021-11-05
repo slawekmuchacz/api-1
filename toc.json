@@ -1,6 +1,17 @@
 {
   "items": [
     {
+      "type": "group",
+      "title": "Internal Group",
+      "items": [
+        {
+          "type": "item",
+          "title": "Internal",
+          "uri": "models/Set.v1.yaml"
+        }
+      ]
+    },
+    {
       "type": "item",
       "title": "Header",
       "uri": "docs/anchors.md"
