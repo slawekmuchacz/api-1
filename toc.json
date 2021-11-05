@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "title": "Combiners",
+      "type": "item",
+      "uri": "references/combiners.yaml"
+    },
+    {
       "type": "group",
       "title": "Internal Group",
       "items": [
