@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Combiners
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /user:
+    get:
+      summary: Get user
+      operationId: get-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - allOf:
+                      - type: object
+                        properties:
+                          test:
+                            type: string
+                      - $ref: '#/components/schemas/User'
+                  - allOf:
+                      - type: object
+                        properties:
+                          test:
+                            type: string
+                      - $ref: '#/components/schemas/Account'
+components:
+  schemas:
+    User:
+      title: User
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      allOf:
+        - type: object
+          properties:
+            userId:
+              type: integer
+              description: Unique identifier for the given user.
+          required:
+            - userId
+        - $ref: '#/components/schemas/Object'
+    Object:
+      title: InnerObject
+      type: object
+      properties:
+        name:
+          type: string
+    Account:
+      title: Account
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: string
+        - $ref: '#/components/schemas/Object'
