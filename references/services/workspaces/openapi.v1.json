@@ -1,0 +1,650 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Workspaces",
+    "version": "1.0",
+    "summary": "Workspaces Service Proposal",
+    "description": "This API describes the operations for interacting with Stoplight Workspaces",
+    "contact": {
+      "name": "Stoplight",
+      "url": "https://stoplight.io",
+      "email": "support@stoplight.io"
+    },
+    "termsOfService": "https://stoplight.io/terms"
+  },
+  "servers": [
+    {
+      "url": "https://stoplight.io/api",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/v1/workspaces": {
+      "parameters": [],
+      "get": {
+        "summary": "Get All Workspaces",
+        "tags": [],
+        "operationId": "get-users-userId",
+        "description": "Gets a list of all workspaces",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workspace"
+                  }
+                },
+                "examples": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Workspace",
+        "operationId": "post-workspaces",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        },
+        "description": "Creates a new workspace",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get Workspace by ID",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-workspaces-workspace_id"
+      },
+      "put": {
+        "summary": "Edit Workspace",
+        "operationId": "put-workspaces-workspace_id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Workspace",
+        "operationId": "delete-workspaces-workspace_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": ""
+      }
+    },
+    "/v1/workspaces/{workspace_id}/members": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get Workspace Members",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkspaceMember"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-workspaces-workspace_id-members",
+        "description": "Gets all members belonging to the given workspace"
+      },
+      "post": {
+        "summary": "Add Member to Workspace",
+        "operationId": "post-workspaces-workspace_id-members",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceMember"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/members/{member_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "member_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a Workspace Member by ID",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceMember"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-workspaces-workspace_id-members-member_id",
+        "description": "Get a specific member belonging to a workspace"
+      },
+      "delete": {
+        "summary": "Remove Workspace Member",
+        "operationId": "delete-workspaces-workspace_id-members-member_id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/v1/workspaces/{workspace_id}/projects": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get All Projects Belonging to a Workspace",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "$ref": "../projects/openapi.v1.json#/components/schemas/Project"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "pinned": {
+                                "type": "boolean"
+                              },
+                              "resourceCount": {
+                                "type": "integer"
+                              },
+                              "group": {
+                                "$ref": "../groups/openapi.v1.json#/components/schemas/Group"
+                              }
+                            },
+                            "required": ["pinned", "resourceCount"]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "items": [
+                        {
+                          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                          "slug": "awesome-granite-cheese",
+                          "name": "Awesome Granite Cheese",
+                          "type": "web",
+                          "groupId": "eb54e96e-21b8-4f54-9cd4-80fccbd06f55",
+                          "resources": [
+                            {
+                              "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                              "format": "json",
+                              "uri": "https://stoplight.io/api/v1/projects/1/resources/schemas/reference%2Fopenapi.v1.json?version=main&release=1.0.0",
+                              "encoding": "base64",
+                              "size": 12874,
+                              "version": "main",
+                              "release": "1.0.0",
+                              "type": "schemas",
+                              "path": "/reference%2Fopenapi.v1.json"
+                            },
+                            {
+                              "id": "2f58cd98-5f76-4054-aec4-daa2e1a38368",
+                              "format": "markdown",
+                              "uri": "https://stoplight.io/api/v1/projects/1/resources/articles/docs%2Freadme.md?version=main&release=1.0.0",
+                              "encoding": "base64",
+                              "size": 15945,
+                              "version": "main",
+                              "release": "1.0.0",
+                              "type": "articles",
+                              "path": "/docs/readme.md"
+                            }
+                          ],
+                          "pinned": true,
+                          "resourceCount": 0,
+                          "group": {
+                            "id": "Z3JwOjE",
+                            "name": "Product",
+                            "description": "The product group",
+                            "slug": "product",
+                            "icon": "rocketship",
+                            "icon_color": "blue",
+                            "projects_count": 5,
+                            "members_count": 6,
+                            "visibility": "internal",
+                            "owner": {
+                              "role": "owner",
+                              "id": "Z21iOjE",
+                              "first_name": "Chris",
+                              "last_name": "Lott",
+                              "username": "lottamus",
+                              "avatar_url": "https://ca.slack-edge.com/T185DB42X-U18C0KVLZ-e9d09b637ef8-512"
+                            },
+                            "workspace": {
+                              "id": "d2s6MQ",
+                              "name": "Stoplight Meta",
+                              "slug": "meta"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        },
+        "operationId": "v1.workspaces.listProjects",
+        "description": "Get all projects belonging to a workspace",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["design", "styleguide"]
+            },
+            "in": "query",
+            "name": "flavor"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "pinned",
+            "description": "Limit by projects pinned by the current user"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["internal", "private", "public"]
+            },
+            "in": "query",
+            "name": "visibility",
+            "description": "Limit by visibility `internal`, `private`, or `public`"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Return list of projects matching the search criteria"
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/groups": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get All Groups Belonging to a Workspace",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-workspaces-workspace_id-groups",
+        "description": "Get all groups related to a given workspace"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "description": "Represents generic error",
+        "examples": [
+          {
+            "message": "Name is required.",
+            "code": 400,
+            "type": "VALIDATION_ERROR"
+          }
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Detailed error message"
+          },
+          "code": {
+            "type": "number",
+            "enum": [400, 401, 403, 404, 409, 500],
+            "description": "HTTP Status Code"
+          },
+          "type": {
+            "type": "string",
+            "description": "Error type"
+          }
+        },
+        "required": ["message", "code"]
+      },
+      "Workspace": {
+        "title": "Workspace",
+        "type": "object",
+        "description": "",
+        "examples": [],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the given workspace.",
+            "readOnly": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["id"]
+      },
+      "WorkspaceMember": {
+        "title": "WorkspaceMember",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User ID",
+            "readOnly": true
+          },
+          "first_name": {
+            "type": "string",
+            "description": "User first name",
+            "readOnly": true
+          },
+          "last_name": {
+            "type": "string",
+            "description": "User last name",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "description": "User username",
+            "readOnly": true
+          },
+          "avatar_url": {
+            "type": "string",
+            "description": "User avatar URL",
+            "readOnly": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/WorkspaceMemberRole"
+          },
+          "last_seen": {
+            "type": "string",
+            "readOnly": true
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "user email",
+                  "readOnly": true
+                },
+                "primary": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["email", "primary"]
+            }
+          },
+          "required": ["id", "role", "username", "emails", "avatar_url"]
+        },
+        "examples": []
+      },
+      "WorkspaceMemberRole": {
+        "type": "string",
+        "title": "WorkspaceMemberRole",
+        "enum": ["owner", "admin", "billing", "maker", "viewer", "guest"]
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "BadRequestError": {
+        "description": "The server could not understand the request due to invalid syntax.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Missing required field": {
+                "value": {
+                  "message": "Name is required.",
+                  "code": 400,
+                  "type": "VALIDATION_ERROR"
+                }
+              }
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "The server can not find the requested resource.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Entity not found": {
+                "value": {
+                  "message": "Group is not found",
+                  "code": 404,
+                  "type": "GROUP_NOT_FOUND"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "description": "The client must authenticate itself to get the requested response.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Missing authorization header": {
+                "value": {
+                  "message": "Missing authorization",
+                  "code": 401,
+                  "type": "UNAUTHORIZED"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ForbiddenError": {
+        "description": "The client does not have permissions to access the content.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "No permissions": {
+                "value": {
+                  "message": "You do not have permissions to delete this group.",
+                  "code": 403,
+                  "type": "FORBIDDEN"
+                }
+              }
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The server has encountered a situation it doesn't know how to handle.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Transporter receives unknown data": {
+                "value": {
+                  "message": "Internal Server Error",
+                  "code": 500,
+                  "type": "INVALID_PACKET_DATA"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}
