@@ -47,6 +47,10 @@ paths:
           explode: true
           allowEmptyValue: true
           allowReserved: true
+        - schema:
+            type: string
+          in: query
+          name: b
       description: ''
       requestBody:
         content:
