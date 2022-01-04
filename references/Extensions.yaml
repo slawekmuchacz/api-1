@@ -1,0 +1,29 @@
+openapi: 3.1.0
+info:
+  title: Extensions
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+x-taco: mech
+paths:
+  /ext:
+    parameters: []
+    get:
+      summary: Extensions
+      x-taco: koko
+      x-race: true
+      x-way: 5
+      x-and: 
+        one: 1
+        two: 2
+        three: 3
+      tags: []
+      responses:
+        '200':
+          description: User Found
+        '404':
+          description: User Not Found
+      operationId: get-extensions
+      description: Retrieve extensions.
+components:
+  schemas: {}

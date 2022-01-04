@@ -1,0 +1,987 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Projects",
+    "version": "1.0",
+    "description": "Stoplight Projects",
+    "contact": {
+      "name": "Stoplight",
+      "url": "https://stoplight.io",
+      "email": "support@stoplight.io"
+    },
+    "termsOfService": "https://stoplight.io/terms"
+  },
+  "servers": [
+    {
+      "url": "https://stoplight.io/api",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/v1/projects/{project_id}/releases": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "List releases for a project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Releases"
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          }
+        },
+        "operationId": "v1.projects.listReleases",
+        "description": "List all the releases available for a given  project",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/min_release"
+          },
+          {
+            "$ref": "#/components/parameters/max_release"
+          }
+        ]
+      }
+    },
+    "/v1/workspaces/{workspace_id}/projects": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "workspace_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get All Projects Belonging to a Workspace",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/Project"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "pinned": {
+                                "type": "boolean"
+                              },
+                              "resourceCount": {
+                                "type": "integer"
+                              },
+                              "group": {
+                                "$ref": "../groups/openapi.v1.json#/components/schemas/Group"
+                              }
+                            },
+                            "required": ["pinned", "resourceCount"]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example": {
+                    "value": {
+                      "items": [
+                        {
+                          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                          "slug": "awesome-granite-cheese",
+                          "name": "Awesome Granite Cheese",
+                          "type": "web",
+                          "groupId": "eb54e96e-21b8-4f54-9cd4-80fccbd06f55",
+                          "resources": [
+                            {
+                              "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                              "format": "json",
+                              "uri": "https://stoplight.io/api/v1/projects/1/resources/schemas/reference%2Fopenapi.v1.json?version=main&release=1.0.0",
+                              "encoding": "base64",
+                              "size": 12874,
+                              "version": "main",
+                              "release": "1.0.0",
+                              "type": "schemas",
+                              "path": "/reference%2Fopenapi.v1.json"
+                            },
+                            {
+                              "id": "2f58cd98-5f76-4054-aec4-daa2e1a38368",
+                              "format": "markdown",
+                              "uri": "https://stoplight.io/api/v1/projects/1/resources/articles/docs%2Freadme.md?version=main&release=1.0.0",
+                              "encoding": "base64",
+                              "size": 15945,
+                              "version": "main",
+                              "release": "1.0.0",
+                              "type": "articles",
+                              "path": "/docs/readme.md"
+                            }
+                          ],
+                          "pinned": true,
+                          "resourceCount": 0,
+                          "group": {
+                            "id": "Z3JwOjE",
+                            "name": "Product",
+                            "description": "The product group",
+                            "slug": "product",
+                            "icon": "rocketship",
+                            "icon_color": "blue",
+                            "projects_count": 5,
+                            "members_count": 6,
+                            "visibility": "internal",
+                            "owner": {
+                              "role": "owner",
+                              "id": "Z21iOjE",
+                              "first_name": "Chris",
+                              "last_name": "Lott",
+                              "username": "lottamus",
+                              "avatar_url": "https://ca.slack-edge.com/T185DB42X-U18C0KVLZ-e9d09b637ef8-512"
+                            },
+                            "workspace": {
+                              "id": "d2s6MQ",
+                              "name": "Stoplight Meta",
+                              "slug": "meta"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/InternalServerError"
+          }
+        },
+        "operationId": "v1.projects.listProjects",
+        "description": "Get all projects belonging to a workspace",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["design", "styleguide"]
+            },
+            "in": "query",
+            "name": "flavor"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "pinned",
+            "description": "Limit by projects pinned by the current user"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": ["internal", "private", "public"]
+            },
+            "in": "query",
+            "name": "visibility",
+            "description": "Limit by visibility `internal`, `private`, or `public`"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Return list of projects matching the search criteria"
+          }
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/releases/{release}/styleguide.js": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        },
+        {
+          "$ref": "#/components/parameters/release_path"
+        }
+      ],
+      "get": {
+        "summary": "Get the bundled JS for a Spectral Style Guide",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string",
+                  "enum": ["application/javascript"]
+                }
+              }
+            },
+            "content": {
+              "application/javascript": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          }
+        },
+        "operationId": "v1.projects.getStyleGuideBundled",
+        "description": "Get the bundled JavaScript ruleset for a given Style Guide Project and version."
+      }
+    },
+    "/v1/projects/{project_id}/releases/{release}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        },
+        {
+          "$ref": "#/components/parameters/release_path"
+        }
+      ],
+      "get": {
+        "summary": "Get the release for a project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "formats": [],
+                      "extends": [],
+                      "aliases": {
+                        "Info": {
+                          "description": "",
+                          "targets": [
+                            {
+                              "formats": ["oas2"],
+                              "given": "$.info"
+                            },
+                            {
+                              "formats": ["oas3"],
+                              "given": "$.info"
+                            }
+                          ]
+                        }
+                      },
+                      "rules": {
+                        "no-info": {
+                          "description": "",
+                          "message": "Info is missing",
+                          "given": ["Info"],
+                          "recommended": false,
+                          "type": "",
+                          "severity": "warn",
+                          "then": {
+                            "field": "",
+                            "function": "undefined"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          }
+        },
+        "operationId": "v1.projects.getRelease",
+        "description": "Get the release for a given Project and version."
+      }
+    },
+    "/v1/projects/{project_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "Get Project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/release"
+          }
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/pin": {
+      "parameters": [
+        {
+          "name": "project_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "an opaque project id (implementation note: use `encodeID` in `libs/service-utils/src/encoding.ts`) "
+        }
+      ],
+      "post": {
+        "summary": "Pin the Project to a Sidebar",
+        "operationId": "post-v1-projects-project_id-favorite",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/InternalServerError"
+          }
+        },
+        "description": ""
+      },
+      "delete": {
+        "summary": "Unpin the Project from a Sidebar",
+        "operationId": "delete-v1-projects-project_id-pin",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/NotFoundError"
+          },
+          "500": {
+            "$ref": "../shared-api/error-responses.json#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/v1/projects/{project_id}/resources": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "List Project Resources",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id-resources-resource_type",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/release"
+          }
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/resources/{resource_type}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resource_type"
+        },
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "List Project Resources By Resource Type",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id-resources",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/release"
+          }
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/resources/{resource_type}/{resource_path}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/resource_type"
+        },
+        {
+          "$ref": "#/components/parameters/resource_path"
+        },
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "Get Project Resource",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id-resource",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/version"
+          },
+          {
+            "$ref": "#/components/parameters/release"
+          }
+        ]
+      }
+    },
+    "/v1/projects/{project_id}/versions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "List Project Versions",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Version"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id-versions"
+      }
+    },
+    "/v1/projects/{project_id}/versions/{version}/releases": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "version",
+          "in": "path",
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/project_id"
+        }
+      ],
+      "get": {
+        "summary": "List Version Releases",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Release"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-v1-projects-project_id-versions-version-releases"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Release": {
+        "type": "object",
+        "title": "Release",
+        "examples": [
+          {
+            "release": 1,
+            "message": "Initial release",
+            "published_at": "2019-08-24T14:15:22Z",
+            "published_by": {
+              "id": "123",
+              "username": "modeling_melvin"
+            }
+          }
+        ],
+        "properties": {
+          "release": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "message": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "published_by": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": ["release", "message", "published_at"],
+        "readOnly": true
+      },
+      "Project": {
+        "title": "Project",
+        "type": "object",
+        "description": "",
+        "examples": [
+          {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "slug": "awesome-granite-cheese",
+            "name": "Awesome Granite Cheese",
+            "type": "web",
+            "groupId": "eb54e96e-21b8-4f54-9cd4-80fccbd06f55",
+            "resources": [
+              {
+                "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+                "format": "json",
+                "uri": "https://stoplight.io/api/v1/projects/1/resources/schemas/reference%2Fopenapi.v1.json?version=main&release=1.0.0",
+                "encoding": "base64",
+                "size": 12874,
+                "version": "main",
+                "release": "1.0.0",
+                "type": "schemas",
+                "path": "/reference%2Fopenapi.v1.json"
+              },
+              {
+                "id": "2f58cd98-5f76-4054-aec4-daa2e1a38368",
+                "format": "markdown",
+                "uri": "https://stoplight.io/api/v1/projects/1/resources/articles/docs%2Freadme.md?version=main&release=1.0.0",
+                "encoding": "base64",
+                "size": 15945,
+                "version": "main",
+                "release": "1.0.0",
+                "type": "articles",
+                "path": "/docs/readme.md"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["cli", "local", "vcs", "web"]
+          },
+          "visibility": {
+            "type": "string",
+            "enum": ["internal", "private", "public"]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "owner": {
+            "$ref": "../workspaces/openapi.v1.json#/components/schemas/WorkspaceMember"
+          },
+          "groupId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceInfo"
+            }
+          }
+        },
+        "required": ["id", "slug", "name", "type", "visibility", "createdAt", "updatedAt"]
+      },
+      "ResourceInfo": {
+        "title": "ResourceInfo",
+        "type": "object",
+        "description": "",
+        "x-internal": false,
+        "examples": [
+          {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "format": "json",
+            "uri": "https://stoplight.io/api/v1/projects/1/resources/schemas/reference%2Fopenapi.v1.json?version=main&release=1.0.0",
+            "encoding": "base64",
+            "size": 12874,
+            "version": "main",
+            "release": "1.0.0",
+            "type": "schemas",
+            "path": "/reference%2Fopenapi.v1.json"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "format": {
+            "type": "string",
+            "enum": ["yaml", "json"]
+          },
+          "uri": {
+            "type": "string"
+          },
+          "encoding": {
+            "type": "string",
+            "enum": ["base64", "utf-8"]
+          },
+          "size": {
+            "type": "number"
+          },
+          "version": {
+            "type": "string"
+          },
+          "release": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["schemas", "specs", "articles", "styleguides"]
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "format", "uri", "encoding", "size", "version", "release", "type", "path"]
+      },
+      "Resource": {
+        "title": "Resource",
+        "examples": [
+          {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "format": "json",
+            "uri": "https://stoplight.io/api/v1/projects/1/resources/schemas/reference%2Fopenapi.v1.json?version=main&release=1.0.0",
+            "encoding": "base64",
+            "size": 12874,
+            "version": "main",
+            "release": "1.0.0",
+            "type": "schemas",
+            "path": "/reference%2Fopenapi.v1.json",
+            "content": "IyA9PSBTY2hlbWEgSW5mb3...",
+            "contentSha": "4c294617b60715c1d218e61164a3abd4808a4284cbc30e6728a01ad9aada4481"
+          }
+        ],
+        "description": "",
+        "x-internal": false,
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResourceInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string"
+              },
+              "contentSha": {
+                "type": "string"
+              }
+            },
+            "required": ["content", "contentSha"]
+          }
+        ]
+      },
+      "Version": {
+        "title": "Version",
+        "type": "object",
+        "examples": [
+          {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "version": "main"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": ["id", "version"]
+      },
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "description": "Represents generic error",
+        "examples": [
+          {
+            "message": "Name is required.",
+            "code": 400,
+            "type": "VALIDATION_ERROR"
+          }
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Detailed error message"
+          },
+          "code": {
+            "type": "number",
+            "enum": [400, 401, 403, 404, 409, 500],
+            "description": "HTTP Status Code"
+          },
+          "type": {
+            "type": "string",
+            "description": "Error type"
+          }
+        },
+        "required": ["message", "code"]
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "Releases": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Release"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "example": {
+                "value": {
+                  "items": [
+                    {
+                      "release": 2,
+                      "message": "Fix typos",
+                      "published_at": "2019-08-24T15:15:22Z",
+                      "published_by": {
+                        "id": "123",
+                        "username": "modeling_melvin"
+                      }
+                    },
+                    {
+                      "release": 1,
+                      "message": "Initial release",
+                      "published_at": "2019-08-24T14:15:22Z",
+                      "published_by": {
+                        "id": "123",
+                        "username": "modeling_melvin"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "project_id": {
+        "name": "project_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "an opaque project id (implementation note: use `encodeID` in `libs/service-utils/src/encoding.ts`) "
+      },
+      "min_release": {
+        "name": "min_release",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "Filters results to releases greater than or equal this"
+      },
+      "release_path": {
+        "name": "release",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "description": "An incrementing integer, such that current_release - old_release = number of intermediate releases"
+      },
+      "version": {
+        "name": "version",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "release": {
+        "name": "release",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "resource_type": {
+        "name": "resource_type",
+        "required": true,
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "enum": ["schemas", "specs", "articles"]
+        }
+      },
+      "resource_path": {
+        "name": "resource_path",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "max_release": {
+        "name": "max_release",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer"
+        },
+        "description": "Filters results to releases less than or equal this"
+      }
+    }
+  },
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}
