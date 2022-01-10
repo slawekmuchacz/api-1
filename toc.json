@@ -16,6 +16,11 @@
         }
       ]
     },
+     {
+      "type": "item",
+      "title": "Extensions",
+      "uri": "references/Extensions.yaml"
+    },
     {
       "type": "item",
       "title": "Header",
