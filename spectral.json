@@ -6,6 +6,580 @@
     "oas3.0",
     "oas3.1"
   ],
-  "aliases": {},
-  "rules": {}
+  "aliases": {
+    "Responses": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.components.responses"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Operation.responses"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.responses"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Operation.responses"
+          ]
+        }
+      ]
+    },
+    "Response": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Responses[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Responses[*]"
+          ]
+        }
+      ]
+    },
+    "Path": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.paths[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.paths[*]"
+          ]
+        }
+      ]
+    },
+    "Parameters": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Path.parameters"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Path.parameters"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Operation.parameters"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Operation.parameters"
+          ]
+        }
+      ]
+    },
+    "Parameter": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#ParametersDefinitions[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Parameters[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#ParametersDefinitions[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Parameters[*]"
+          ]
+        }
+      ]
+    },
+    "ParametersDefinitions": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.parameters"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.components.parameters"
+          ]
+        }
+      ]
+    },
+    "Encoding": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#MediaType.encoding"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#MediaType.encoding"
+          ]
+        }
+      ]
+    },
+    "MediaType": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#RequestBody.content"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Parameter.content"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Response.content"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#RequestBody.content"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Parameter.content"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Response.content"
+          ]
+        }
+      ]
+    },
+    "Headers": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Response.headers"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.components.headers"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Encoding.headers"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Response.headers"
+          ]
+        }
+      ]
+    },
+    "Header": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Response.headers[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Headers[*]"
+          ]
+        }
+      ]
+    },
+    "RequestBody": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Operation.requestBody"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Operation.requestBody"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.components.requestBodies[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.components.requestBodies[*]"
+          ]
+        }
+      ]
+    },
+    "Operation": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.paths[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.paths[*]"
+          ]
+        }
+      ]
+    },
+    "SchemaObject": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#MediaType.schema"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "#Parameter.schema"
+          ]
+        },
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.components.schemas[*]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#MediaType.schema"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "#Parameter.schema"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.components.schemas[*]"
+          ]
+        }
+      ]
+    },
+    "Info": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.info"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.info"
+          ]
+        }
+      ]
+    },
+    "Document": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$"
+          ]
+        }
+      ]
+    },
+    "Descriptions": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$..[description,title]"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$..[description,title]"
+          ]
+        }
+      ]
+    }
+  },
+  "rules": {
+    "operation-success-response": {
+      "given": [
+        "#Operation"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "responses"
+      },
+      "message": "Operation must have at least one \"2xx\" or \"3xx\" response.'"
+    },
+    "info-contact": {
+      "given": [
+        "#Info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "contact"
+      },
+      "message": "Info object must have \"contact\" object."
+    },
+    "info-description": {
+      "given": [
+        "#Info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "description"
+      },
+      "message": "Info object must have \"description\" object."
+    },
+    "info-license": {
+      "given": [
+        "#Info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "license"
+      },
+      "message": "Info object must have \"license\" object."
+    },
+    "license-url": {
+      "given": [
+        "#Info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "license.url"
+      },
+      "message": "License object must include \"url\"."
+    },
+    "openapi-tags-alphabetical": {
+      "given": [
+        "#Document",
+        "#Document"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "alphabetical",
+        "functionOptions": {
+          "keyedBy": "name"
+        },
+        "field": "tags"
+      },
+      "message": "OpenAPI object must have alphabetical \"tags\"."
+    },
+    "operation-description": {
+      "given": [
+        "#Operation"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "description"
+      },
+      "message": "Operation \"description\" must be present and non-empty string."
+    },
+    "operation-description-operationId": {
+      "given": [
+        "#Operation"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "operationId"
+      },
+      "message": "Operation must have \"operationId\"."
+    }
+  }
 }
