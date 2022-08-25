@@ -1,0 +1,82 @@
+{
+  "description": "",
+  "formats": [
+    "oas2",
+    "oas3",
+    "oas3.0",
+    "oas3.1"
+  ],
+  "aliases": {
+    "info": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.info"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.info"
+          ]
+        }
+      ]
+    },
+    "kle": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.kle"
+          ]
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": [
+            "$.kle"
+          ]
+        }
+      ]
+    },
+    "pop": {
+      "description": "",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": [
+            "$.pop"
+          ]
+        }
+      ]
+    }
+  },
+  "rules": {
+    "info-contact": {
+      "given": [
+        "#info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "contact"
+      }
+    }
+  },
+  "functions": [
+    "hello"
+  ],
+  "functionsDir": ".stoplight/custom-functions"
+}

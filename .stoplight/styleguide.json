@@ -1,0 +1,188 @@
+{
+  "description": "",
+  "spectralExtends": [],
+  "formats": [
+    "oas2",
+    "oas3",
+    "oas3.0",
+    "oas3.1"
+  ],
+  "aliases": {},
+  "rules": {},
+  "extends": [
+    "cHJqOjE4@15"
+  ],
+  "extendedStyleguides": [
+    {
+      "id": "cHJqOjE4",
+      "name": "Stoplight Style Guide",
+      "slug": "stoplight-style-guide",
+      "workspace": {
+        "slug": "taco",
+        "name": "taco"
+      },
+      "icon": "code",
+      "color": "#43aaec",
+      "latestRelease": {
+        "release": 15
+      }
+    }
+  ],
+  "inheritedRules": [
+    {
+      "given": [
+        "#info"
+      ],
+      "severity": "error",
+      "then": {
+        "function": "truthy",
+        "field": "contact"
+      },
+      "extendedFrom": "cHJqOjE4@15",
+      "name": "info-contact"
+    }
+  ],
+  "inheritedTargets": [
+    {
+      "extendedFrom": "cHJqOjE4@15",
+      "name": "info",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": "$.info"
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": "$.info"
+        }
+      ]
+    },
+    {
+      "extendedFrom": "cHJqOjE4@15",
+      "name": "kle",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": "$.kle"
+        },
+        {
+          "formats": [
+            "oas3"
+          ],
+          "given": "$.kle"
+        }
+      ]
+    },
+    {
+      "extendedFrom": "cHJqOjE4@15",
+      "name": "pop",
+      "targets": [
+        {
+          "formats": [
+            "oas2"
+          ],
+          "given": "$.pop"
+        }
+      ]
+    }
+  ],
+  "inheritedFunctions": [
+    {
+      "id": "m9wMdJFX34hO6OnWx8cKE",
+      "extendedFrom": "cHJqOjE4@15",
+      "name": "hello",
+      "content": "export default input => {\n  if (input !== \"hello\") {\n    return [\n      {\n        message: 'Value must equal \"hello\".',\n      },\n    ];\n  }\n};",
+      "schema": ""
+    }
+  ],
+  "library": {
+    "cHJqOjE4@15": {
+      "description": "uuummmnnaaaannneeexxxcc",
+      "formats": [
+        "oas2",
+        "oas3",
+        "oas3.0",
+        "oas3.1"
+      ],
+      "aliases": {
+        "info": {
+          "name": "info",
+          "targets": [
+            {
+              "formats": [
+                "oas2"
+              ],
+              "given": "$.info"
+            },
+            {
+              "formats": [
+                "oas3"
+              ],
+              "given": "$.info"
+            }
+          ]
+        },
+        "kle": {
+          "name": "kle",
+          "targets": [
+            {
+              "formats": [
+                "oas2"
+              ],
+              "given": "$.kle"
+            },
+            {
+              "formats": [
+                "oas3"
+              ],
+              "given": "$.kle"
+            }
+          ]
+        },
+        "pop": {
+          "name": "pop",
+          "targets": [
+            {
+              "formats": [
+                "oas2"
+              ],
+              "given": "$.pop"
+            }
+          ]
+        }
+      },
+      "rules": {
+        "info-contact": {
+          "given": [
+            "#info"
+          ],
+          "severity": "error",
+          "then": {
+            "function": "truthy",
+            "field": "contact"
+          },
+          "name": "info-contact"
+        }
+      },
+      "spectralExtends": [],
+      "name": "Stoplight Style Guide",
+      "x-embeddedFunctions": [
+        {
+          "id": "xhiBj2DW2y8JaRSxw2b4S",
+          "extendedFrom": "",
+          "name": "hello",
+          "content": "export default input => {\n  if (input !== \"hello\") {\n    return [\n      {\n        message: 'Value must equal \"hello\".',\n      },\n    ];\n  }\n};",
+          "schema": ""
+        }
+      ],
+      "extendedDefault": false
+    }
+  },
+  "extendedDefault": true
+}

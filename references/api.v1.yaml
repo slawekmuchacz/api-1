@@ -183,6 +183,23 @@ paths:
       tags: []
       responses: {}
       operationId: get-mech
+    post:
+      summary: ''
+      operationId: post-mech
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+              required:
+                - file
 components:
   schemas:
     Kle:
