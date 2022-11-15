@@ -4,6 +4,7 @@ info:
   title: Swagger Petstore
   license:
     name: MIT
+  description: pet
 servers:
   - url: 'http://petstore.swagger.io/v1'
 paths:
@@ -134,7 +135,7 @@ components:
             - pending
             - sold
         category:
-          $ref: '#/components/schemas/Category' 
+          $ref: '#/components/schemas/Category'
       required:
         - name
         - photoUrls
@@ -149,4 +150,3 @@ components:
         - name
       x-tags:
         - Pets
-
