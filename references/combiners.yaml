@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Combiners
   version: '1.0'
-  summary: Combiners new now now not yet
+  summary: Combiners new now now not yet done
 servers:
   - url: 'http://localhost:3000'
 paths:
