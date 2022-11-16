@@ -3,6 +3,8 @@ info:
   title: api
   version: '1.0'
   description: 'Click [here](../docs/anchors.md#header1) or [here](../docs/anchors.md#header3)'
+  contact:
+    name: JJ
 servers:
   - url: 'http://localhost:3000'
 paths:
