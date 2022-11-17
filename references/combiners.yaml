@@ -33,7 +33,7 @@ components:
   schemas:
     User:
       title: User
-      description: users
+      description: user
       examples:
         - id: 142
           firstName: Alice
